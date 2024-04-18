@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans = "";
+        int n = s.length();
+        bool inWord = false; // Flag to track if we are inside a word
+        string word = "";
+
+        for (int i = n - 1; i >= 0; --i) {
+            if (s[i] != ' ') {
+                // If current character is not a space, add to word
+                inWord = true;
+                word = s[i] + word; // Prepend character to the word
+            } else {
+                // If current character is a space
+                if (inWord) {
+                    // If we were in a word, add the word to the result
+                    if (!ans.empty()) {
+                        ans += " "; // Add space before appending the word
+                    }
+                    ans += word;
+                    word = ""; // Reset word for next word
+                    inWord = false; // Reset flag
+                }
+            }
+        }
+
+        // Add the last word (if any) to the result
+        if (inWord) {
+            if (!ans.empty()) {
+                ans += " "; // Add space before appending the last word
+            }
+            ans += word;
+        }
+
+        return ans;
+    }
+};
